@@ -48,10 +48,10 @@
       url,
       success: (fileStr) => {
         if (/(png|image|ts|jpg|mp4|jpeg|EXTINF)/.test(fileStr)) {
-          appendDom()
           const urlObj = new URL(url)
           urlObj.searchParams.append('title', getTitle())
           m3u8Target = urlObj.href
+          appendDom(m3u8Target)
           console.log('【m3u8】----------------------------------------')
           console.log(urlObj)
           console.log('http://blog.luckly-mjw.cn/tool-show/m3u8-downloader/index.html?source=' + m3u8Target)
@@ -93,7 +93,7 @@
     return title
   }
 
-  function appendDom() {
+  function appendDom(target) {
     if (document.getElementById('m3u8-download-dom')) {
       return
     }
@@ -118,6 +118,16 @@
     border: 1px solid #eeeeee;
     background-color: #3D8AC7;
   " id="m3u8-append">注入下载</div>
+   <div style="
+    margin-top: 6px;
+    padding: 6px 10px ;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #eeeeee;
+    background-color: #3D8AC7;
+  "><textarea id="target" style="width:0;height:0;">${target}</textarea><button onclick="document.getElementById('target').select();document.execCommand('copy');">复制地址</button></div>
   <div style="
     margin-top: 4px;
     height: 34px;
